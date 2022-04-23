@@ -16,7 +16,7 @@ Let's do it...
 
 ### <a name="02">:diamond_shape_with_a_dot_inside: &nbsp;One master Node and Multiple Worker Node Setup</a> 
 I have created three VM one for master node and another two for worker node. You can see in the screenshot.
-<br> <br> <img src= "Image1" alt="VM List"> <br><br>
+<br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-1.png" alt="VM List"> <br><br>
 
 #### Master Node Configuration
 
@@ -45,7 +45,7 @@ docker --version
 systemctl status docker
 ````
 After running all of the commands you should see like this on the putty for the last two commands:
-<br> <br> <img src= "Image-2" alt="Commands"> <br><br>
+<br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-2.png" alt="Commands"> <br><br>
 
 Now we will start to install kubernetes and it's necessery component.
 ````Bash
@@ -71,7 +71,6 @@ apt-get install -qy kubelet kubectl kubeadm
 apt-mark hold kubelet kubeadm kubectl
 
 # Add new daemon configure file into docker (Copy and paste the full text below)
-path=""$PWD"" && cd /etc/docker && cat <<EOF | sudo tee /etc/docker/daemon.json
 path="$PWD" && cd /etc/docker && cat <<EOF | sudo tee /etc/docker/daemon.json
 {
 "exec-opts": ["native.cgroupdriver=systemd"],
@@ -127,7 +126,8 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 Now I am doing ````ssh```` on the **Worker Node VM**. We have two Worker Node. So we will make ssh connection in the both VM and run all command at a time on two VM. You can do it one VM then another VM. This is your choice. Now I am inside the two Worker Node VM. I am using putty. Run this following command one by one from terminal for both VM.
 
-````Bash
+**Run this command for your all worker node VM**
+
 ````Bash
 # I am giving the root access
 sudo su
@@ -152,7 +152,7 @@ docker --version
 systemctl status docker
 ````
 After running all of the commands you should see like this on the putty for the last two commands:
-<br> <br> <img src= "Image-2" alt="Commands"> <br><br>
+<br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-3.png" alt="Docker Status"> <br><br>
 
 Now we will start to install kubernetes and it's necessery component.
 ````Bash
@@ -178,7 +178,6 @@ apt-get install -qy kubelet kubectl kubeadm
 apt-mark hold kubelet kubeadm kubectl
 
 # Add new daemon configure file into docker (Copy and paste the full text below)
-path=""$PWD"" && cd /etc/docker && cat <<EOF | sudo tee /etc/docker/daemon.json
 path="$PWD" && cd /etc/docker && cat <<EOF | sudo tee /etc/docker/daemon.json
 {
 "exec-opts": ["native.cgroupdriver=systemd"],
@@ -197,11 +196,22 @@ systemctl daemon-reload
 # Docker Restart
 systemctl restart docker
 ````
+**Did yor Rememeber?** We told to copied a text in notepad which will be needed during the time of worker node confiugration. Yes! now we use that text to connect this worker node with that master node.
 
+After running all of the above command successfully, now run this command in all of your woker node VM. Since we have two worker nodes so we need run that command what we copied in notepad both VMs. Command was like this.** Don't use this following command. Use yours!**
+````Bash
+kubeadm join 10.2.0.6:6443 --token gvnywi.tj5w7bgv3hxa2ha9 \
+        --discovery-token-ca-cert-hash sha256:5466957f48cba6106ada1516179b82a620d3dc39b7b5a566aeb608404c83df9d
+````
 
+Now our two worker nodes are connected with the master node successfully.
 
+**Master Node VM's Terminal:** In the master node VM terminal run this command ````kubectl get nodes````. You will see the list of the nodes.
+<br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-4.png" alt="Nodes list of the k8s cluster"> <br><br>
 
+You have successfully configured One Master Node and Two Worker Nodes in the Kubernetes Cluster.
 
+Now it's time to focus on the second part of this docs.
 
 
 
