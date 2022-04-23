@@ -2,7 +2,7 @@
 | **SL** | **Topic** |
 | --- | --- |
 | 01 | [Prerequisite](#01) |
-| 02 | [One master Node and Multiple Worker Node Setup <br>- Master Node Configuration <br>- Worker Node Configuration](#02) |
+| 02 | [One Master Node and Multiple Worker Node Setup <br>- Master Node Configuration <br>- Worker Node Configuration](#02) |
 | 03 | [Master and Worker in the Same VM Setup<br> - Minikkube Configuration](#03) |
 
 ### <a name="01">:diamond_shape_with_a_dot_inside: &nbsp;Prerequisite</a> 
@@ -16,7 +16,7 @@ Let's do it...
 
 ### <a name="02">:diamond_shape_with_a_dot_inside: &nbsp;One master Node and Multiple Worker Node Setup</a> 
 I have created three Azure VM one for master node and another two for worker node in Microsoft Azure. You can see in the screenshot.
-<br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-1.png" alt="VM List"> <br><br>
+<br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-1.png" alt="VM List"> <br>
 
 ### Master Node Configuration
 
@@ -195,7 +195,7 @@ systemctl daemon-reload
 systemctl restart docker
 ````
 
-**Did you remember?** We were told to copy a text in notepad which will be needed during the time of worker node configuration. Yes! now we use that text to connect this worker node with the master node.
+**Did you remember?** I was told to copy a text in notepad which will be needed during the time of worker node configuration. Yes! now we use that text to connect this worker node with the master node.
 
 After running all of the above commands successfully, now run this command in all of your worker node VM. Since we have two worker node so we need to run that command on both VMs that we copied from notepad. Command was like this. **Don't use this following command. Use yours!**
 ````Bash
