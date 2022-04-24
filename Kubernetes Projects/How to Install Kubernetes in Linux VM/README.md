@@ -20,7 +20,7 @@ I have created three Azure VM one for master node and another two for worker nod
 
 ### Master Node Configuration
 
-I am doing ssh on the **Master VM** and start to configure it. Now I am inside the Master VM. I am using putty. Run this following command one by one from terminal.
+I am doing ````ssh```` on the **Master VM** and start to configure it. Now I am inside the Master VM. I am using putty. Run this following command one by one from terminal.
 ````Bash
 # I am giving the root access
 sudo su
@@ -213,3 +213,71 @@ You have successfully configured **One Master Node and Two Worker Node in the Ku
 Now it's time to focus on the second way of the Kubernetes setup.
 
 ### <a name="03">:diamond_shape_with_a_dot_inside: &nbsp;Master and Worker in the Same VM Setup</a> 
+Now we will setup Master and Worker in the Same VM Setup with the help of **Minikube**. I have created a Azure VM with Ubuntu OS in Microsoft Azure.
+<br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-5.png" alt="Nodes list of the k8s cluster"> <br><br>
+I am doing ````ssh```` on the **Master-Worker-Node VM** and start to configure it. Now I am inside the Master-Worker-Node VM. I am using putty. Run this following command one by one from terminal.
+
+````Bash
+# I am giving the root access
+sudo su
+
+# Update all of the packages
+apt-get update
+
+# Install the transport-https
+apt-get install apt-transport-https
+
+# Install docker
+apt install docker.io -y
+
+# Start docker and Enable to automatic start docker after VM start
+systemctl start docker
+systemctl enable docker
+
+# Check the version of the docker
+docker --version
+
+# Check the status of the docker. You should see it as Active (Running) status
+systemctl status docker
+````
+After running all of the commands you should see like below image on the putty for the last two commands:
+<br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-6.png" alt="Docker Status Check"> <br><br>
+Now we will start to install Kubernetes (Minikube) and its necessary component.
+
+````Bash
+# Download and Install kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
+
+# Check the version of kubectl
+kubectl version
+
+# Install Minikube
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && mv minikube /usr/local/bin/
+
+# Check the version of Minikube
+minikube version
+
+# To run minikube properly install Conntrack
+apt install conntrack
+
+# Check the version of conntrack
+conntrack --version
+
+# Start Minikube for the first time only after the installation
+minikube start --vm-driver=none
+
+# Minikube status
+minikube status
+
+# Check the list of the Nodes
+kubectl get nodes
+````
+
+As we use same VM as Master Node and Worker Node so it will show one node only. And also after running the ````minikube status````, we can see the all things are running well.
+<br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-7.png" alt="Docker Status Check"> <br><br>
+
+
+That's how we can install/Setup/Configure Kubernetes in a Linux Virtual Machine.
+
+
+
