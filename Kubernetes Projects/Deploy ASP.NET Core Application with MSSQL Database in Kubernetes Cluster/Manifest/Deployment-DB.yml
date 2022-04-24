@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dotnetapp
+  name: dotnetdb
 spec:
   selector:
     matchLabels:
@@ -13,13 +13,8 @@ spec:
         name: myapp
     spec:
       containers:
-      - name: dotnetappcon
-        image: shadikul/dot-net-core-app:v2
-        resources:
-        ports:
-        - containerPort: 80
       - name: db
-        image: shadikul/dot-net-core-db:v1
+        image: shadikul/dot-net-core-db:v1   #Here eneter your dockerhub image
         resources:
         ports:
         - containerPort: 1433
