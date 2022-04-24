@@ -213,9 +213,9 @@ You have successfully configured **One Master Node and Two Worker Node in the Ku
 Now it's time to focus on the second way of the Kubernetes setup.
 
 ### <a name="03">:diamond_shape_with_a_dot_inside: &nbsp;Master and Worker in the Same VM Setup</a> 
-Now we will setup Master and Worker in the Same VM Setup with the help of **Minikube**. I have created a Azure VM with Ubuntu OS in Microsoft Azure.
+Now we will setup Master and Worker in the Same VM Setup with the help of **Minikube**. I have created an Azure VM with Ubuntu OS in Microsoft Azure.
 <br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-5.png" alt="Nodes list of the k8s cluster"> <br><br>
-I am doing ````ssh```` on the **Master-Worker-Node VM** and start to configure it. Now I am inside the Master-Worker-Node VM. I am using putty. Run this following command one by one from terminal.
+I am doing ````ssh```` on the **Master-Worker-Node VM** and starting to configure it. Now I am inside the Master-Worker-Node VM. I am using putty. Run the following command one by one from the terminal.
 
 ````Bash
 # I am giving the root access
@@ -273,11 +273,11 @@ minikube status
 kubectl get nodes
 ````
 
-As we use same VM as Master Node and Worker Node so it will show one node only. And also after running the ````minikube status````, we can see the all things are running well.
+As we use the same VM as Master Node and Worker Node so it will show one node only. And also after running the ````minikube status````, we can see that all things are running well.
 <br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM/Images/Image-7.png" alt="Docker Status Check"> <br><br>
 
 
-That's how we can install/Setup/Configure Kubernetes in a Linux Virtual Machine.
+**That's how we can install/Setup/Configure Kubernetes in a Linux Virtual Machine.**
 
 
-
+#### :diamond_shape_with_a_dot_inside: &nbsp;That’s it. We have learned How to Setup Kubernetes Environment in Linux Virtual Machine. :diamond_shape_with_a_dot_inside: &nbsp;Happy Learning. :diamond_shape_with_a_dot_inside: &nbsp;
