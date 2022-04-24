@@ -3,7 +3,7 @@
 | --- | --- |
 | 01 | [Introduction](#01) |
 | 02 | [Prepare a Deployment YAML File](#02) |
-| 03 | [Prepare a Nodeport YAML File](#03) |
+| 03 | [Prepare a NodePort YAML File](#03) |
 | 04 | [Prepare a Ingress YAML File](#04) |
 | 05 | [Network Connection Within the Cluster](#05) |
 
@@ -14,7 +14,7 @@ Aslo you can check this project for details: [How to Dockerize ASP.NET Core Appl
 
 So, we have the necessery image to add them in Kubernetes cluster. Here we have to understand a very important things that is **Database Connection String** of the **Source Code** during the time of dockerization of the project. When you dockerized your application you have to make sure you change the following things of the source code:
 
-**Data Source:** **It will be the VM IP address of the Nodes.**__
+**Data Source:** **It will be the VM IP address of the Nodes. (20.85.228.101,30001;)**__
 **Port:** **It will be Nodeport IP that you will defined on Manifest. We will discuss it below in details.**__
 **Database Name:** **Set your database name what you want.**__
 **User ID:** **sa**__
@@ -23,7 +23,10 @@ So, we have the necessery image to add them in Kubernetes cluster. Here we have 
 I am assuming that you dockerized your application successfully. Let's start to add them in kubernetes cluster.
 
 ### <a name="01">:diamond_shape_with_a_dot_inside: &nbsp;Prepare a Deployment YAML File</a> 
-First, we will prepare a deployment manifest to create pods. We need to create two pods, first one is for application and second one is for database. This will be the deployment.yml file:
+First, we will prepare a deployment manifest to create pods. We need to create two pods, first one is for application and second one is for database. 
+
+**Deployment-App.yml:**
+
 ````
 apiVersion: apps/v1
 kind: Deployment
@@ -45,6 +48,26 @@ spec:
         resources:
         ports:
         - containerPort: 80
+````
+
+**Deployment-DB.yml:**
+
+````
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnetdb
+spec:
+  selector:
+    matchLabels:
+      name: myapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: myapp
+    spec:
+      containers:
       - name: db
         image: shadikul/dot-net-core-db:v1
         resources:
@@ -52,9 +75,41 @@ spec:
         - containerPort: 1433
 ````
 
-You can see that we defined one replica for each pod. We have given a selector name myapp. We have created two pods. Application pod name is: 
+You can see that we defined one replica for each pod. We have given a selector name myapp. We have created two pods. In **Deployment-App.yml**, application pod name is: **dotnetapp** and in **Deployment-DB.yml**, database pod name is: **dotnetdb**. Our deployment file is completed.
 
+Now run this command to apply this manifest into Kubernetes: ````kubectl apply -f Deployment-App.yml````.
 
+### <a name="01">:diamond_shape_with_a_dot_inside: &nbsp;Prepare a NodePort YAML File</a> 
+Now our second step is to prepare a Nodeport manifest file. Nodeport will create network connection between pods and give an advantage to browse it from internet using its defined port.
+
+**NodePort.yml:**
+````
+apiVersion: v1
+kind: Service
+metadata:
+  name: dotnet-nodeport
+spec:
+  selector:
+    name: myapp
+  type: NodePort
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 30000
+    protocol: TCP
+  - name: db
+    protocol: TCP
+    port: 1433
+    targetPort: 1433
+    nodePort: 30001
+````
+
+You can see that the NodePort name is **dotnet-nodeport**. You can also notice that we have given the selector name **myapp** which we defined on the deployment manifest too. This is the way to know each other of deployment and nodeport.
+
+Now run this command to apply this manifest into Kubernetes: ````kubectl apply -f NodePort.yml.yml````.
+
+You can see your application from browser. Open chrome or any browser 
 
 
 
