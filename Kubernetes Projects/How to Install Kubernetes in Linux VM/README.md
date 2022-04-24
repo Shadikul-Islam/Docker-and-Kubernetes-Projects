@@ -6,7 +6,7 @@
 | 03 | [Master and Worker in the Same VM Setup<br> - Minikkube Configuration](#03) |
 
 ### <a name="01">:diamond_shape_with_a_dot_inside: &nbsp;Prerequisite</a> 
-Today we will setup the Kubernetes environment in the Linux VM. We will use Ubuntu VM. We will seutp k8s in two ways. One way is **One Master Node VM** and **Multiple Worker Node VM** and the second way is **Master and Worker in the Same VM**. 
+Today we will setup the Kubernetes environment in the Linux VM. We will use Ubuntu VM. We will seutp k8s in two ways. One way is **One Master Node VM** and **Multiple Worker Node VM** and the second way is **Master and Worker in the Same VM**.
 
 **In the first way**, we will need one VM for the master node and atleast two VM for the worker node. Specification of the master node VM will be atleast RAM: 4 GB and CPU: 2 core and any specification of the VM can be run worker node.
 
