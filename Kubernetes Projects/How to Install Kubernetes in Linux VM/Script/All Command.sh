@@ -1,3 +1,8 @@
+######################################################
+
+ One Master Node VM and Multiple Worker Node VM Setup
+
+######################################################
 # I am giving the root access
 sudo su
 
@@ -83,3 +88,61 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 # Check all the Nodes
 kubectl get nodes
+
+#############################################################
+
+ Master and Worker in the Same VM Setup 
+
+#############################################################
+# I am giving the root access
+sudo su
+
+# Update all of the packages
+apt-get update
+
+# Install the transport-https
+apt-get install apt-transport-https
+
+# Install docker
+apt install docker.io -y
+
+# Start docker and Enable to automatic start docker after VM start
+systemctl start docker
+systemctl enable docker
+
+# Check the version of the docker
+docker --version
+
+# Check the status of the docker. You should see it as Active (Running) status
+systemctl status docker
+
+# Download and Install kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
+
+# Check the version of kubectl
+kubectl version
+
+# Install Minikube
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && mv minikube /usr/local/bin/
+
+# Check the version of Minikube
+minikube version
+
+# To run minikube properly install Conntrack
+apt install conntrack
+
+# Check the version of conntrack
+conntrack --version
+
+# Start Minikube for the first time only after the installation
+minikube start --vm-driver=none
+
+# Minikube status
+minikube status
+
+# Check the list of the Nodes
+kubectl get nodes
+
+#########################################################
+
+
