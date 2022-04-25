@@ -184,16 +184,21 @@ Networking is a central part of Kubernetes, but it can be challenging to underst
 **External-to-Service communications:** this is covered by services. Service mean Ingress.
 
 **Short Description of NodePort:**
+
 A NodePort service is the most primitive way to get external traffic directly to your service. NodePort, as the name implies, opens a specific port on all the Nodes (the VMs), and any traffic that is sent to this port is forwarded to the service.
 <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/Deploy%20ASP.NET%20Core%20Application%20with%20MSSQL%20Database%20in%20Kubernetes%20Cluster/Images/Image-7.png" alt="NodePort">
+
 Basically, a NodePort service has two differences from a normal “ClusterIP” service. First, the type is “NodePort.” There is also an additional port called the nodePort that specifies which port to open on the nodes. If you don’t specify this port, it will pick a random port. Most of the time you should let Kubernetes choose the port. You can only use ports 30000–32767.
 
 **Short Description of Ingress:**
+
 Unlike all the above examples, Ingress is actually NOT a type of service. Instead, it sits in front of multiple services and act as a “smart router” or entrypoint into your cluster. Ingress is the most useful if you want to expose multiple services under the same IP address, and these services all use the same L7 protocol (typically HTTP). 
 <br> <br> <img src= "https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/blob/master/Kubernetes%20Projects/Deploy%20ASP.NET%20Core%20Application%20with%20MSSQL%20Database%20in%20Kubernetes%20Cluster/Images/Image-9.png" alt="NodePort"> <br>
 An Ingress may be configured to give Services externally-reachable URLs, load balance traffic, terminate SSL / TLS, and offer name-based virtual hosting. An Ingress controller is responsible for fulfilling the Ingress, usually with a load balancer, though it may also configure your edge router or additional frontends to help handle the traffic.
 
+
 **That's how we can Deploy ASP.NET Core Application with MSSQL Database in Kubernetes Cluster.**
+
 
 
 #### :diamond_shape_with_a_dot_inside: &nbsp;That’s it. We have learned How to Deploy ASP.NET Core Application with Microsoft SQL Server Database in Kubernetes Cluster. :diamond_shape_with_a_dot_inside: &nbsp;Happy Learning. :diamond_shape_with_a_dot_inside: &nbsp;
