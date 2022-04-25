@@ -8,7 +8,7 @@
 | 05 | [Prepare Database Pod](#05) |
 | 06 | [Network Connection Within the Cluster](#06) |
 
-### <a name="01">:diamond_shape_with_a_dot_inside: &nbsp;Introduction</a> 
+### <a name="01">:diamond_shape_with_a_dot_inside: &nbsp;Introduction</a>
 We will Deploy ASP.NET Core Application with Microsoft SQL Server Database in Kubernetes Cluster. We have a project that we already dockerized and upload the images into the docker hub. We will use Minikube to implement the Kubernetes cluster. You can read this documentation to know the details: [How to Install/Setup Kubernetes Environment in Linux Virtual Machine](https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/tree/master/Kubernetes%20Projects/How%20to%20Install%20Kubernetes%20in%20Linux%20VM#readme).
 
 Also you can check this project for details: [How to Dockerize ASP.NET Core Application with MSSQL Server](https://github.com/Shadikul-Islam/Docker-and-Kubernetes-Projects/tree/master/Docker%20Projects/Dockerize%20ASP.NET%20Core%20Application%20with%20MSSQL%20Server#readme). 
