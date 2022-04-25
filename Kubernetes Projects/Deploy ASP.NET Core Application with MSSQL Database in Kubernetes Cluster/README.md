@@ -26,7 +26,7 @@ I am assuming that you dockerized your application successfully. Let's start to 
 ### <a name="02">:diamond_shape_with_a_dot_inside: &nbsp;Prepare a Deployment YAML File</a> 
 First, we will prepare a deployment manifest to create pods. We need to create two pods, the first one is for the application and the second one is for the database. 
 
-**Deployment-App.yml:**
+**Deployment-App.yml:** 
 
 ````
 apiVersion: apps/v1
