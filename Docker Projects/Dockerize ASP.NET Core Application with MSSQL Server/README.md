@@ -26,7 +26,7 @@ Here our **Database Source** will be ````db```` which we will declare on the **d
 By running this command: ````vi Dockerfile```` you can open the Docekerfile and you can see my Dockerfile of this project. Let's discuss in detail what the Dockerfile will do.
 - This portion of the lines will create an intermediate image from the base image and expose the ports.
 ```
-FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base 
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
