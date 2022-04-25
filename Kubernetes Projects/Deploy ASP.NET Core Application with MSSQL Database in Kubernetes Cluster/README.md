@@ -16,9 +16,13 @@ Also you can check this project for details: [How to Dockerize ASP.NET Core Appl
 So, we have the necessary image to add them to the Kubernetes cluster. Here we have to understand a very important thing that is **Database Connection String** of the **Source Code** during the time of dockerization of the project. When you dockerized your application you have to make sure you change the following things in the source code:
 
 **Data Source:** _**It will be the VM IP address of the Nodes. (20.85.228.101,30001;)**_
+
 **Port:** _**It will be Nodeport IP that you will defined on Manifest. We will discuss it below in details.**_
+
 **Database Name:** _**Set your database name what you want.**_
+
 **User ID:** _**sa**_
+
 **Password:** _**AnyStrongPassword**_
 
 I am assuming that you dockerized your application successfully. Let's start to add them to the Kubernetes cluster.
