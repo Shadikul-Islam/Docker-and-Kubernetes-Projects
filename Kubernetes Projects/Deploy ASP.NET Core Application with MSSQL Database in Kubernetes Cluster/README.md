@@ -183,8 +183,11 @@ This is the main page of this sample application.
 Networking is a central part of Kubernetes, but it can be challenging to understand exactly how it is expected to work. There are 4 distinct networking problems to address:
 
 **Highly-coupled container-to-container communications:** this is solved by Pods and **localhost** communications.
+
 **Pod-to-Pod communications:** Every pod has its own IP. So they communicate with each other with the help of IP.
+
 **Pod-to-Service communications:** this is covered by services. Service mean Nodeport, ClusterIP etc.
+
 **External-to-Service communications:** this is covered by services. Service mean Ingress.
 
 **Short Description of NodePort:**
