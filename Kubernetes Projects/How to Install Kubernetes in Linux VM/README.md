@@ -3,7 +3,7 @@
 | --- | --- |
 | 01 | [Prerequisite](#01) |
 | 02 | [One Master Node and Multiple Worker Node Setup <br>- Master Node Configuration <br>- Worker Node Configuration](#02) |
-| 03 | [Master and Worker in the Same VM Setup<br> - Minikkube Configuration](#03) |
+| 03 | [Master and Worker in the Same VM Setup<br> - Minikube Configuration](#03) |
 
 ### <a name="01">:diamond_shape_with_a_dot_inside: &nbsp;Prerequisite</a> 
 Today we will setup the Kubernetes environment in the Linux VM. We will use Ubuntu VM. We will seutp k8s in two ways. One way is **One Master Node VM** and **Multiple Worker Node VM** and the second way is **Master and Worker in the Same VM**.
