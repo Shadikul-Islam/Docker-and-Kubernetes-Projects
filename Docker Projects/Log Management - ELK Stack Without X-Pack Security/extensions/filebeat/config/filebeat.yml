@@ -1,5 +1,5 @@
 name: filebeat
-
+ 
 filebeat.inputs:
 - type: filestream
   id: my-filestream

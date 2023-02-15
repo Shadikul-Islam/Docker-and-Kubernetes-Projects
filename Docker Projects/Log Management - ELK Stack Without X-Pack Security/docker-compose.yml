@@ -71,4 +71,4 @@ volumes:
 # sudo docker stop $(sudo docker ps -a -q); sudo docker rm $(sudo docker ps -a -q)
 # extensions--> filebeat --> filebeat-compose.yml --> volumes: /var/log/nginx/:/var/log/
 # extensions--> filebeat --> config -->filebeat.yml --> filebeat.inputs: paths: /var/log/*.log
-# docker-compose -f docker-compose.yml -f extensions/filebeat/filebeat-compose.yml up -d --build
+# docker-compose -f docker-compose.yml -f extensions/filebeat/filebeat-compose.yml up -d --build 
