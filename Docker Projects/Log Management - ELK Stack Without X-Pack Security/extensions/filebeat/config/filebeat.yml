@@ -1,0 +1,41 @@
+name: filebeat
+
+filebeat.inputs:
+- type: filestream
+  id: my-filestream
+  enabled: true
+  paths:
+    - /var/log/test3.log
+  parsers:
+    - ndjson:
+      overwrite_keys: true
+      add_error_key: true
+      expand_keys: true
+
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+#The Docker autodiscover provider automatically retrieves logs from Docker containers as they start and stop.
+# filebeat.autodiscover:
+#   providers:
+#     - type: docker
+#       hints.enabled: true
+
+processors:
+  - add_cloud_metadata: ~
+
+output.logstash:
+  hosts: ["logstash:5044"]
+  username: filebeat_internal
+  password: ${FILEBEAT_INTERNAL_PASSWORD}
+
+# output.elasticsearch:
+#   hosts: [ http://elasticsearch:9200 ]
+  # username: filebeat_internal
+  # password: ${FILEBEAT_INTERNAL_PASSWORD}
+
+http:
+  enabled: true
+  host: 0.0.0.0
