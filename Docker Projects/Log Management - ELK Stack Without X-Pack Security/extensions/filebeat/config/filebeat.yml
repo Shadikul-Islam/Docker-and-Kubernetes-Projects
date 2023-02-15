@@ -5,7 +5,7 @@ filebeat.inputs:
   id: my-filestream
   enabled: true
   paths:
-    - /var/log/test3.log
+    - /var/log/*.log
   parsers:
     - ndjson:
       overwrite_keys: true
