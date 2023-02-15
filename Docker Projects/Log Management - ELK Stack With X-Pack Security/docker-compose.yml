@@ -78,3 +78,5 @@ volumes:
 # docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u kibana
 # Paste the password of kibana into kibana--> config--> kibana.yml--> elasticsearch.password: line
 # docker-compose restart kibana
+# Visit http://IP:5601 --> Username: elastic --> Password: elastic123
+# Credentials have been declared in the .env folder and mounted from the docker-compose file Environment part
