@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  node:
+    build: .
+    image: node:14
+    container_name: node
+    restart: always
+    ports:
+      - 3000:3000
+    # volumes:
+    #   - ./app:/app
+    working_dir: /app
+    command: npm start
+    networks:
+      - app_net
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - app_net
+
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    ports:
+      - "8001:8001"
+    networks:
+      - app_net
+
+volumes:
+  redis_data:
+
+networks:
+  app_net:
+    driver: bridge

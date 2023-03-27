@@ -1,0 +1,13 @@
+{
+  "name": "redis-form",
+  "version": "1.0.0",
+  "description": "Sample app that stores form data in Redis",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "redis": "^3.1.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
