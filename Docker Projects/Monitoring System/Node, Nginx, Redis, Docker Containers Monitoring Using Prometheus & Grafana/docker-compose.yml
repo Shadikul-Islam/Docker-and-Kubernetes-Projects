@@ -140,3 +140,4 @@ services:
 # docker-compose restart
 # Grafana Settings --> Datasource --> Add Datasource --> Search Redis --> Address: redis://ip.6379 --> Save & Test
 # If redis datasource not add then run "docker exec grafana grafana-cli plugins install redis-datasource" and then run "docker restart grafana"
+# Grafana Alert Test Query: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100
