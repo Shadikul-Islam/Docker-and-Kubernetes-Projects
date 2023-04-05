@@ -31,6 +31,26 @@ services:
     networks:
       - monitor-net
 
+  grafana:
+    image: grafana/grafana:latest
+    build: .
+    container_name: grafana
+    volumes:
+      - ./Redis:/var/lib/grafana/plugins
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/provisioning/grafana.ini:/etc/grafana/grafana.ini
+    environment:
+      - GF_SECURITY_ADMIN_USER=${ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
+    ports:
+     - "3000:3000"
+    # expose:
+    #    - "3000"
+    networks:
+      - monitor-net
+
 
   nodeexporter:
     image: prom/node-exporter:latest
@@ -49,26 +69,6 @@ services:
     #  - "9101:9100"
     expose:
        - "9100"
-    networks:
-      - monitor-net
-
-
-  grafana:
-    image: grafana/grafana:latest
-    build: .
-    container_name: grafana
-    volumes:
-      - ./Redis:/var/lib/grafana/plugins
-      - ./grafana/provisioning:/etc/grafana/provisioning
-    environment:
-      - GF_SECURITY_ADMIN_USER=${ADMIN_USER}
-      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - GF_USERS_ALLOW_SIGN_UP=false
-    restart: unless-stopped
-    ports:
-     - "3000:3000"
-    # expose:
-    #    - "3000"
     networks:
       - monitor-net
 
