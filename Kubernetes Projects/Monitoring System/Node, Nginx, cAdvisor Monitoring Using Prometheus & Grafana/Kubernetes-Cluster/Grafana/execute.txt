@@ -1,0 +1,4 @@
+kubectl apply -f grafana-deploy.yml,grafana-svc.yml
+
+kubectl delete -f grafana-deploy.yml,grafana-svc.yml
+

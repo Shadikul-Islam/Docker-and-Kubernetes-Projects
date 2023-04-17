@@ -1,0 +1,4 @@
+kubectl apply -f nginx-conf.yml,nginx-deploy.yml,nginx-exporter-deploy.yml,nginx-exporter-svc.yml,nginx-svc.yml
+
+kubectl delete -f nginx-conf.yml,nginx-deploy.yml,nginx-exporter-deploy.yml,nginx-exporter-svc.yml,nginx-svc.yml
+

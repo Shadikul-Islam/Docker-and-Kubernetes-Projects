@@ -1,0 +1,4 @@
+kubectl apply -f cadvisor-deploy.yml,cadvisor-svc.yml
+
+kubectl delete -f cadvisor-deploy.yml,cadvisor-svc.yml
+

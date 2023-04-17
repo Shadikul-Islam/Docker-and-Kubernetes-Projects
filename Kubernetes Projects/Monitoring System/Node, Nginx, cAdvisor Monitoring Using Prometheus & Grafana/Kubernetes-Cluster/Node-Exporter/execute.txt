@@ -1,0 +1,4 @@
+kubectl apply -f node-exporter-deploy.yml,node-exporter-svc.yml
+
+kubectl delete -f node-exporter-deploy.yml,node-exporter-svc.yml
+
