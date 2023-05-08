@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  c-compiler:
+    build: ./c-compiler
+    container_name: c-compiler
+    ports:
+      - "5001:5000"
+    networks:
+      - my_network
+
+  java-compiler:
+    build: ./java-compiler
+    container_name: java-compiler
+    ports:
+      - "5002:5000"
+    networks:
+      - my_network
+
+  python-compiler:
+    build: ./python-compiler
+    container_name: python-compiler
+    ports:
+      - "5003:5000"
+    networks:
+      - my_network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "80:80"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+

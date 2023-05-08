@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online IDE</title>
+</head>
+<body>
+    <h1>Online IDE</h1>
+    <select id="language">
+        <option value="c">C</option>
+        <option value="java">Java</option>
+        <option value="python">Python</option>
+    </select>
+    <br><br>
+    <textarea id="code" rows="10" cols="80"></textarea>
+    <br><br>
+    <button onclick="compile()">Compile</button>
+    <br><br>
+    <h3>Output:</h3>
+    <pre id="output"></pre>
+    <script src="app.js" defer></script>
+
+</body>
+</html>
+
