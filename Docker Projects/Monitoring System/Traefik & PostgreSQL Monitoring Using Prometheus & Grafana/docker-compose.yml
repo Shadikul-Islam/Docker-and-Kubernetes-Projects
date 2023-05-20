@@ -47,7 +47,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`13.212.129.10`) && PathPrefix(`/grafana`)"
+      - "traefik.http.routers.grafana.rule=Host(`Public-IP`) && PathPrefix(`/grafana`)"
     ports:
      - "3000:3000"
     networks:
@@ -132,3 +132,5 @@ services:
     networks:
       - monitor-net
  
+
+ # Change This Line in Grafana and Add Server IP Address "traefik.http.routers.grafana.rule=Host(`Public-IP`) && PathPrefix(`/grafana`)
