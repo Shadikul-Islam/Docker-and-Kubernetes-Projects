@@ -196,9 +196,10 @@ services:
 # Need to change Host IP for grafana: traefik.http.routers.grafana.rule
 
 # For Docker Daemon Monitoring
+# Change the prometheus.yml file docker-daemon job IP Address
 # sudo vim /etc/docker/daemon.json
 # {
 #   "metrics-addr" : "0.0.0.0:9323",
 #   "experimental" : true
 # }
-# docker restart prometheus
+# sudo systemctl restart docker
