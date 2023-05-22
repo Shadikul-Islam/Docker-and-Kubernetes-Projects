@@ -184,46 +184,21 @@ services:
     networks:
       - monitor-net
  
-  # ceph:
-  #   image: ceph/daemon
-  #   container_name: ceph
-  #   command: "demo"
-  #   environment:
-  #     - CEPH_DEMO_UID=demo
-  #     - CEPH_DEMO_ACCESS_KEY=myaccesskey
-  #     - CEPH_DEMO_SECRET_KEY=mysecretkey
-  #     - CEPH_DEMO_BUCKET=mybucket
-  #     - MON_IP=127.0.0.1
-  #     - CEPH_PUBLIC_NETWORK=0.0.0.0/0
-  #     - CEPH_DAEMON=demo
-  #     - DEBUG=verbose
-  #     - CEPHFS_CREATE=1
-  #     - CEPHFS_DATA_POOL_PG=8
-  #     - CEPHFS_METADATA_POOL_PG=8
-  #     - SREE_PORT=5000
-  #   privileged: true
-  #   volumes:
-  #     - "./ceph:/var/lib/ceph/"
-  #     - "/etc/ceph:/etc/ceph"
-  #     - "/dev:/dev"
-  #   ports:
-  #     - "5000:5000"
-  #     - "6789:6789"
-  #   networks:
-  #     - monitor-net
-
-  # ceph-exporter:
-  #   image: digitalocean/ceph_exporter
-  #   container_name: ceph-exporter
-  #   volumes:
-  #     - "/etc/ceph:/etc/ceph:ro"
-  #   networks:
-  #     - monitor-net
 
 # mv dot-env .env
 # docker-compose build --no-cache
 # docker-compose up -d
 # ./script.sh
 # Grafana Settings --> Datasource --> Add Datasource --> Search Redis --> Address: redis://ip.6379 --> Save & Test
+
 # Grafana Alert Test Query: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100
+
 # Need to change Host IP for grafana: traefik.http.routers.grafana.rule
+
+# For Docker Daemon Monitoring
+# sudo vim /etc/docker/daemon.json
+# {
+#   "metrics-addr" : "0.0.0.0:9323",
+#   "experimental" : true
+# }
+# docker restart prometheus
