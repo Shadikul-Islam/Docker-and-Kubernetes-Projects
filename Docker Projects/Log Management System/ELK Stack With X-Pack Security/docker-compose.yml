@@ -76,7 +76,7 @@ volumes:
 # vim extensions/filebeat/config/filebeat.yml --> extensions--> filebeat --> config -->filebeat.yml --> filebeat.inputs: paths: /var/log/*.log
 # docker-compose -f docker-compose.yml -f extensions/filebeat/filebeat-compose.yml up -d --build
 # docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u kibana
-# Paste the password of kibana into kibana--> config--> kibana.yml--> elasticsearch.password: line
+# vim kibana/config/kibana.yml --> Paste the password of kibana into kibana--> config--> kibana.yml--> elasticsearch.password: line
 # docker-compose restart kibana
 # Visit http://IP:5601 --> Username: elastic --> Password: elastic123
 # Credentials have been declared in the .env folder and mounted from the docker-compose file Environment part
