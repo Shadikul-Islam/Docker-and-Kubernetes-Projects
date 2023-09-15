@@ -6,7 +6,7 @@ filebeat.inputs:
   enabled: true
   paths:
     # - /var/log/test3.log
-    - /var/log/*.log
+    - /var/log/syslog
   parsers:
     - ndjson:
       overwrite_keys: true

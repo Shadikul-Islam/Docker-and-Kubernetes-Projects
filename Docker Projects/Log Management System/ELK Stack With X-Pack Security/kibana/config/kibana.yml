@@ -5,4 +5,4 @@ elasticsearch.hosts: [ http://elasticsearch:9200 ]
 monitoring.ui.container.elasticsearch.enabled: true
 monitoring.ui.container.logstash.enabled: true
 elasticsearch.username: kibana
-elasticsearch.password: OJGex75oxQcTDvwr1G_C
+elasticsearch.password: en6xdcIFgQTWIUFVBJyi

@@ -1,0 +1,53 @@
+=========================
+  Steps for Preparing
+=========================
+
+
+1. Create index lifecycle policy (Manually from Kibana)
+2. Create Index Template (From Kibana Dev Tool)
+3. Add Alias in Existing Index (From Kibana Dev Tool)
+
+
+=================
+  Special Notes
+=================
+During Index lifecycle Policy Maximu age and Delete age should be atleast 2 Minutes
+for testing purpose.
+
+
+=====================
+  Index Template
+=====================
+PUT _index_template/applog-index-template
+{
+  "template": {
+    "settings": {
+      "index": {
+        "lifecycle": {
+          "name": "applog-index-policy",
+          "rollover_alias": "applog"
+        }
+      }
+    }
+  },
+  "index_patterns": [
+    "applog-*"
+  ]
+}
+
+
+=================================
+  Add Alias in Existing Index
+=================================
+POST /_aliases
+{
+  "actions": [
+    {
+      "add": {
+        "index": "COPY-INDEX-NAME",
+        "alias": "applog",
+        "is_write_index": true
+      }
+    }
+  ]
+}
