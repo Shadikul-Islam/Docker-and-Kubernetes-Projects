@@ -11,9 +11,10 @@
 =================
   Special Notes
 =================
-During Index lifecycle Policy Maximu age and Delete age should be atleast 2 Minutes
-for testing purpose.
-
+1. During the Index Lifecycle Policy Maximum Age and Delete Age should be at least 2 minutes
+for testing purposes.
+2. The ILM Policy Name can be copied from logstash.conf file.
+3. The ILM Policy Name will be same in logstash.conf file and Index Template file.
 
 =====================
   Index Template
