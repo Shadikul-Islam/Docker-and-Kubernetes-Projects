@@ -1,25 +1,25 @@
 =========================
   Steps for Preparing
 =========================
-1. Create index lifecycle policy (Manually from Kibana or from dev tool)
-2. Create Index Template (From Kibana Dev Tool)
-3. Add Alias in Existing Index (From Kibana Dev Tool)
+1. Create index lifecycle policy (Manually from Kibana or from the dev tool)
+2. Create an Index Template (From the Kibana Dev Tool)
+3. Add Alias in Existing Index (From the Kibana Dev Tool)
 
 
 =================
   Special Notes
 =================
-1. During the Index Lifecycle Policy Maximum Age and Delete Age should be at least 5 minutes for testing purposes.
+1. In the Index Lifecycle Policy, the Maximum Age should be at least 10 minutes and the Delete Age can be 0ms for testing purposes.
 2. Need to change in logstash.conf file, like:
 3. The ILM Policy Name can be copied from logstash.conf file.
-4. The ILM Policy Name will be same in logstash.conf file and Index Template file.
-5. The Alias name will be same in logstash.conf file, Index Template file and new index creation or exsiting index alias add time.
+4. The ILM Policy Name will be the same in logstash.conf file and Index Template file.
+5. The Alias name will be the same in logstash.conf file, Index Template file, and new index creation or existing index alias add time.
 
 
 =====================
   Name Declaration
 =====================
-In this example, names are:
+In this example, the names are:
 1. Index Name: applog-2023.09.15-000001 - Like this format.
 2. Index Policy Name: applog-ilm-policy
 3. Index Template Name: applog-index-template
@@ -29,21 +29,21 @@ In this example, names are:
 ==================
   How ILM Work
 ==================
-In the below applog-ilm-policy json file we can see that:
+In the below applog-ilm-policy sample file we can see that:
 1. "hot": "min_age": "0ms" - That means,  there is no minimum age requirement for the "hot" phase. In other words, the "hot" phase can be applied immediately after index creation. If "min_age": "10m" then after 10 minutes of index creation "hot" phase will be applied.
-2. "rollover": "max_age": "50m" - After 50 minutes in the "hot" phase then the index will be rollover and create a new index. Data will be stored in a new index.
+2. "rollover": "max_age": "50m" - After 50 minutes in the "hot" phase the index will be rollover and create a new index. Data will be stored in that new index.
 3. "delete": "min_age": "0ms" - When rollover is done then immediately delete that previous index. If "min_age": "10m" then after 10 minutes of rollover index will be deleted.
 
-N.B: The important thing is, that ILM takes 10-15 minutes extra time with the provide time to take any action. That means:
+N.B: The important thing is that ILM takes 10-15 minutes extra time with the provided time to take any action. That means:
  - In hot phase rollover max_age = 50 minutes then it will rollover after 60-65 minutes.
- - In the delete phase delete min_age = 0ms then it will take extra 10-15 minutes to delete the index.
-So the main thing Elasticsearch will take an extra 10-15 minutes to take action on any of the phase activities.
+ - In the delete phase, delete min_age = 0ms then it will take an extra 10-15 minutes to delete the index.
+So the main fact is Elasticsearch will take an extra 10-15 minutes to take action on any of the phase activities.
 
 
 ==========================
   Create ILM Policy
 ==========================
-It can be created from the kibana Index Lifecycle Policies option. But Also can be created from kibana dev tool.
+It can be created from the Kibana Index Lifecycle Policies option. But Also can be created from the Kibana dev tool.
 
 PUT _ilm/policy/applog-ilm-policy
 {
@@ -146,7 +146,4 @@ DELETE /_index_template/applog-index-template
 =================
 
 DELETE /Index-Name/_alias/applog
-
-
-
 
