@@ -1,0 +1,138 @@
+=========================
+  Steps for Preparing
+=========================
+1. Create index lifecycle policy (Manually from Kibana or from dev tool)
+2. Create Index Template (From Kibana Dev Tool)
+3. Add Alias in Existing Index (From Kibana Dev Tool)
+
+
+=================
+  Special Notes
+=================
+1. During the Index Lifecycle Policy Maximum Age and Delete Age should be at least 5 minutes for testing purposes.
+2. Need to change in logstash.conf file, like:
+3. The ILM Policy Name can be copied from logstash.conf file.
+4. The ILM Policy Name will be same in logstash.conf file and Index Template file.
+5. The Alias name will be same in logstash.conf file, Index Template file and new index creation or exsiting index alias add time.
+
+
+=====================
+  Name Declaration
+=====================
+In this example, names are:
+1. Index Name: applog-2023.09.15-000001 - Like this format.
+2. Index Policy Name: applog-ilm-policy
+3. Index Template Name: applog-index-template
+4. Alias Name: applog
+
+
+==========================
+  Create ILM Policy
+==========================
+It can be created from the kibana Index Lifecycle Policies option. But Also can be created from kibana dev tool.
+
+PUT _ilm/policy/applog-ilm-policy
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "min_age": "0ms",
+        "actions": {
+          "set_priority": {
+            "priority": 100
+          },
+          "rollover": {
+            "max_age": "5m"
+          }
+        }
+      },
+      "delete": {
+        "min_age": "5m",
+        "actions": {
+          "delete": {
+            "delete_searchable_snapshot": true
+          }
+        }
+      }
+    }
+  }
+}
+
+
+==========================
+  Create Index Template
+==========================
+
+PUT _index_template/applog-index-template
+{
+  "template": {
+    "settings": {
+      "index": {
+        "lifecycle": {
+          "name": "applog-ilm-policy", 
+          "rollover_alias": "applog"
+        }
+      }
+    }
+  },
+  "index_patterns": [
+    "applog-*"
+  ]
+}
+
+
+=================================
+  Add Alias in Existing Index
+=================================
+
+POST /_aliases
+{
+  "actions": [
+    {
+      "add": {
+        "index": "Index-Name",
+        "alias": "applog",
+        "is_write_index": true
+      }
+    }
+  ]
+}
+
+
+=================================
+  Create New Index with Alias
+=================================
+
+PUT Index-Name
+{
+  "aliases": {
+    "applog": {
+      "is_write_index": true
+    }
+  }
+}
+
+
+========================
+  Delete ILM Policy
+========================
+
+DELETE /_ilm/policy/applog-ilm-policy
+
+
+==========================
+  Delete Index Template
+==========================
+
+DELETE /_index_template/applog-index-template
+
+
+=================
+  Delete Alias
+=================
+
+DELETE /applog/_alias/applog
+
+
+
+
