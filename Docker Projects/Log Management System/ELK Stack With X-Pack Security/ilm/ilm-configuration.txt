@@ -26,6 +26,20 @@ In this example, names are:
 4. Alias Name: applog
 
 
+==================
+  How ILM Work
+==================
+In the below applog-ilm-policy json file we can see that:
+1. "hot": "min_age": "0ms" - That means,  there is no minimum age requirement for the "hot" phase. In other words, the "hot" phase can be applied immediately after index creation. If "min_age": "10m" then after 10 minutes of index creation "hot" phase will be applied.
+2. "rollover": "max_age": "50m" - After 50 minutes in the "hot" phase then the index will be rollover and create a new index. Data will be stored in a new index.
+3. "delete": "min_age": "0ms" - When rollover is done then immediately delete that previous index. If "min_age": "10m" then after 10 minutes of rollover index will be deleted.
+
+N.B: The important thing is, that ILM takes 10-15 minutes extra time with the provide time to take any action. That means:
+ - In hot phase rollover max_age = 50 minutes then it will rollover after 60-65 minutes.
+ - In the delete phase delete min_age = 0ms then it will take extra 10-15 minutes to delete the index.
+So the main thing Elasticsearch will take an extra 10-15 minutes to take action on any of the phase activities.
+
+
 ==========================
   Create ILM Policy
 ==========================
@@ -42,12 +56,12 @@ PUT _ilm/policy/applog-ilm-policy
             "priority": 100
           },
           "rollover": {
-            "max_age": "5m"
+            "max_age": "50m"
           }
         }
       },
       "delete": {
-        "min_age": "5m",
+        "min_age": "0ms",
         "actions": {
           "delete": {
             "delete_searchable_snapshot": true
@@ -131,7 +145,7 @@ DELETE /_index_template/applog-index-template
   Delete Alias
 =================
 
-DELETE /applog/_alias/applog
+DELETE /Index-Name/_alias/applog
 
 
 
