@@ -16,6 +16,39 @@
 5. The Alias name will be the same in logstash.conf file, Index Template file, and new index creation or existing index alias add time.
 
 
+==============================
+  Setup ILM in Existing ELK
+==============================
+1. Stop logstash service and Delete the Previous Index from kibana
+2. Create a New Index
+3. Stop filebeat and Remove filebeat registry
+ - rm -rf /var/lib/filebeat/registry/filebeat
+4. Restart filebeat and logstash
+5. Run these from dev tools, Set time 10 Min
+ - Create ILM Policy
+ - Create Index Template
+ - Add Alias in Existing Index
+6. Delete previous data views and create new
+7. Data view will be in alias name
+
+
+==========================
+  Logstash Modification
+==========================
+
+output {
+	elasticsearch {
+		hosts => "elasticsearch:9200"
+		user => "elastic"
+		password => "${ELASTIC_PASSWORD}"
+		ilm_rollover_alias => "applog"
+		ilm_pattern => "{now/d}-000001"
+		ilm_policy => "applog-ilm-policy"
+	}
+}
+
+
+
 =====================
   Name Declaration
 =====================
