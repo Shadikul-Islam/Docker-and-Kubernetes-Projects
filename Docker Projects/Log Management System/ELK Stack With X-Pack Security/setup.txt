@@ -1,7 +1,5 @@
 ### Step: 1 - Setup ELK & Filebeat in same server ###
 
-In this project structure root directory is: elk-project, Go inside the root directory (cd elk-project).
-
 - cd elk 
 
 - vim extensions/filebeat/filebeat-compose.yml (Add the log directory in volume list)
@@ -35,8 +33,6 @@ In this project structure root directory is: elk-project, Go inside the root dir
 
 
 ### Step: 3 - Setup Alert in Elasticsearch ###
-
-- Get back to root directory (cd ..)
 
 - cd elastalert2
 
