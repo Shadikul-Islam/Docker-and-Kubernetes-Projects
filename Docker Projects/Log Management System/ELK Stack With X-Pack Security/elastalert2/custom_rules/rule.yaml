@@ -1,0 +1,23 @@
+index: applog*
+type: frequency
+num_events: 1
+timeframe:
+  hours: 4
+filter:
+  - query_string:
+      query: "message:ERROR"
+alert:
+  - "email"
+email:
+  - "shadikul.test@gmail.com"
+email_format: html
+alert_subject: "ERROR Detected | Alert from Elasticsearch"
+alert_text: "<h5> Hello,<br></br><br/><b> {0} ERROR event(s)</b> detected in your system. <br/><br></br> <br>Here are a few messages of those errors :</br><br> {2} </br><br> </br><br/><br>Please have a look in it.</br></br><br></br><br></br>Thanks<br/>ElastAlert </h5> "
+alert_text_type: alert_text_only
+alert_text_args:
+  - num_matches
+  - Host_Id
+  - message
+smtp_host: smtp.gmail.com
+smtp_port: 587
+smtp_auth_file: smtp_auth.yml

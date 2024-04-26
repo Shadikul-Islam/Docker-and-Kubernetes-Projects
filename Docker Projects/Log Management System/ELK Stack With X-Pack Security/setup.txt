@@ -1,18 +1,69 @@
+### Step: 1 - Setup ELK & Filebeat in same server ###
 
-1. sudo docker stop $(sudo docker ps -a -q); sudo docker rm $(sudo docker ps -a -q)
+In this project structure root directory is: elk-project, Go inside the root directory (cd elk-project).
 
-2. vim extensions/filebeat/filebeat-compose.yml --> extensions--> filebeat --> filebeat-compose.yml --> volumes: /var/log/:/var/log/
+- cd elk 
 
-3. vim extensions/filebeat/config/filebeat.yml --> extensions--> filebeat --> config -->filebeat.yml --> filebeat.inputs: paths: /var/log/syslog
+- vim extensions/filebeat/filebeat-compose.yml (Add the log directory in volume list)
 
-4. docker-compose -f docker-compose.yml -f extensions/filebeat/filebeat-compose.yml up -d --build
+- vim extensions/filebeat/config/filebeat.yml (Specify the logfile in filebeat config file)
 
-5. docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u kibana
+- docker-compose -f docker-compose.yml -f extensions/filebeat/filebeat-compose.yml up -d --build (Run ELK and Filebeat)
 
-6. vim kibana/config/kibana.yml --> Paste the password of kibana into kibana--> config--> kibana.yml--> elasticsearch.password: line
+- docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u kibana (Copy the Password)
 
-7. docker-compose restart kibana
+- vim kibana/config/kibana.yml (Paste the Password in elasticsearch.password row)
 
-8. Visit http://IP:5601 --> Username: elastic --> Password: elastic123
+- docker restart kibana
 
-9. Credentials have been declared in the .env folder and mounted from the docker-compose file Environment part
+- Visit http://IP:5601 --> Username: elastic --> Password: elastic123
+
+- Credentials have been declared in the .env folder and mounted from the docker-compose file Environment part
+
+
+### Step: 2 - Setup Filebeat in other server only collect logs ###
+
+- Just copy this filebeat folder to the others server to setup
+
+- cd filebeat
+
+- vim docker-compose.yml (Add the log directory in volume list)
+
+- vim config/filebeat.yml (Specify the logfile in filebeat config file and Provide the IP Address of Logstash Server)
+
+- docker-compose up -d 
+
+
+### Step: 3 - Setup Alert in Elasticsearch ###
+
+- Get back to root directory (cd ..)
+
+- cd elastalert2
+
+- chmod +x script.sh
+
+- ./script.sh (In here we will install python 3.12 and some others necessary tools of python)
+
+- sudo rm -r Python-3.12.0 Python-3.12.0.tar.xz (If you want to delete Python related folder those are not needed anymore)
+
+- sudo pip install elastalert2 (Install elastalert2 for alerting)
+
+- vim config.yml (Configure alerting settings as you need)
+
+- vim custom_rules/rule.yml (Configure alerting settings as you need)
+
+- vim custom_rules/smtp_auth.yml (Add your email credentials, if gmail then password will be app password)
+
+- elastalert-create-index (Create Index for elastalert to manage alerting)
+    - Enter Elasticsearch host: Provide Elasticsearch server IP/Domain
+    - Enter Elasticsearch port: Proivide Elasticsearch Port (Default is: 9200)
+    - Use SSL? t/f: Proivide (t) if you setup elk with ssl otherwise (f). In our case it is: f
+    - Enter optional basic-auth username (or leave blank): If setup elasticsearch username provide here. In our case username is: elastic
+    - Enter optional basic-auth password (or leave blank): If setup elasticsearch username provide here. In our case password is: elastic123
+    - Rest of option just hit enter nothing to provide there.
+
+
+- elastalert-test-rule custom_rules/rule.yaml --config config.yml (Test configuration)
+
+- python3.12 -m elastalert.elastalert --verbose --rule custom_rules/rule.yaml (Start to send alerting)
+

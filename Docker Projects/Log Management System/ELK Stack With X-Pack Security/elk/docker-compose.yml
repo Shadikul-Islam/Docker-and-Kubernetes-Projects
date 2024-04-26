@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   elasticsearch:
@@ -33,13 +33,13 @@ services:
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
-    ports:
-      - 5044:5044
     environment:
       LS_JAVA_OPTS: -Xms256m -Xmx256m
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
     networks:
-      - elk
+      - elk 
+    ports:
+      - 5044:5044
     depends_on:
       - elasticsearch
     restart: unless-stopped
@@ -55,8 +55,6 @@ services:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
     ports:
       - 5601:5601
-    # environment:
-    #   KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
     networks:
       - elk
     depends_on:
