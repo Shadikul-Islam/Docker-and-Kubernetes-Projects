@@ -1,0 +1,23 @@
+name: filebeat
+
+filebeat.inputs:
+- type: filestream
+  id: my-filestream
+  enabled: true
+  paths:
+    - /logs/*.log
+
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+output.logstash:
+  hosts: ["logstash:5044"]
+  ssl.certificate_authorities: ["/usr/share/filebeat/config/certs/ca/ca.crt"]
+  ssl.certificate: "/usr/share/filebeat/config/certs/filebeat/filebeat.crt"
+  ssl.key: "/usr/share/filebeat/config/certs/filebeat/filebeat.key"
+
+http:
+  enabled: true
+  host: 0.0.0.0

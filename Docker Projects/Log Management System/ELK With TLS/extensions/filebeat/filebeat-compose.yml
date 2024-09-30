@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  filebeat:
+    image: filebeat:${ELASTIC_VERSION}
+    container_name: filebeat
+    build:
+      context: extensions/filebeat/
+      args:
+        ELASTIC_VERSION: ${ELASTIC_VERSION}
+    user: root
+    command:
+      - -e
+      - --strict.perms=false
+    volumes:
+      - ./extensions/filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro,Z
+      - certificates:/usr/share/filebeat/config/certs:ro
+      - /var/log/:/logs
+      - type: bind
+        source: /var/lib/docker/containers
+        target: /var/lib/docker/containers
+        read_only: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        read_only: true
+    networks:
+      elk:
+        ipv4_address: 172.20.0.5
+    depends_on:
+      - elasticsearch
+    restart: unless-stopped
