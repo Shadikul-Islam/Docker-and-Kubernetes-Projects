@@ -40,6 +40,8 @@ services:
       - elk 
     ports:
       - 5044:5044
+      # - "514:514/udp"
+      # - "514:514/tcp"
     depends_on:
       - elasticsearch
     restart: unless-stopped

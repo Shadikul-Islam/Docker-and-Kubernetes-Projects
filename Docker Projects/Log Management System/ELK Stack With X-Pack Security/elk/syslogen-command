@@ -1,0 +1,7 @@
+From Syslog server
+syslogen 172.31.20.40 -i syslogen_data/cisco_informational.json -c 1
+echo "<13>Test message" | nc -u 172.31.20.40 514
+
+From Elk server
+docker run --rm --net elk-net busybox sh -c "echo '<13>Test log message' | nc logstash 514"
+tcpdump -i ens5 port 514

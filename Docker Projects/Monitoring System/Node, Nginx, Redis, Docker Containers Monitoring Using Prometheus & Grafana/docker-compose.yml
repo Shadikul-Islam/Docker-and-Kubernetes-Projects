@@ -175,6 +175,19 @@ services:
     networks:
       - monitor-net
 
+  snmp:
+    build: ./snmp
+    image: prom/snmp-exporter #quay.io/prometheus/snmp-exporter
+    container_name: snmp-exporter
+    volumes:
+      - snmp_data:/etc/snmp_exporter
+    ports:
+      - 9116:9116
+    restart: always
+    command: --config.file=/etc/snmp_exporter/snmp.yml
+    networks:
+      - monitor-net
+
 networks:
   monitor-net:
     driver: bridge
@@ -187,6 +200,8 @@ volumes:
   prometheus_data:
     external: true
   grafana_data:
+    external: true
+  snmp_data:
     external: true
  
 
