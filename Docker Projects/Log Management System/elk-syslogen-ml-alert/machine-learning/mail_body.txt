@@ -1,0 +1,26 @@
+**Elastic Stack Machine Learning Alert**:
+- **Rules Name**: [{{rule.name}}]
+- **Job IDs**: {{context.jobIds}}
+- **Time**: {{context.timestampIso8601}}
+- **Anomaly score**: {{context.score}}
+
+**Details Message**:
+
+{{context.message}}
+
+{{#context.topInfluencers.length}}
+  **Top influencers**:
+  {{#context.topInfluencers}}
+    {{influencer_field_name}} = {{influencer_field_value}} [{{score}}]
+  {{/context.topInfluencers}}
+{{/context.topInfluencers.length}}
+
+{{#context.topRecords.length}}
+  **Top records**:
+  {{#context.topRecords}}
+    {{function}}({{field_name}}) {{by_field_value}}'{{over_field_value}}'{{partition_field_value}} [{{score}}]. Typical: {{typical}}, Actual: {{actual}}
+  {{/context.topRecords}}
+{{/context.topRecords.length}}
+
+{{! Replace kibanaBaseUrl if not configured in Kibana }}
+[Open in Anomaly Explorer](https://52.6.4.88:5601/app/discover)
