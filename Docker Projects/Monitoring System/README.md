@@ -61,7 +61,7 @@ docker-compose up -d
 * Ensure correct endpoint configuration in OpenTelemetry
 * Verify metrics exposure from Celestia node
 
----
+
 
 ## 2. Node, Nginx, Redis Monitoring
 
@@ -100,7 +100,7 @@ docker-compose up -d
 * Ensure metrics endpoints are exposed (e.g., `/metrics`)
 * Validate Prometheus targets in `prometheus.yml`
 
----
+
 
 ## 3. Python Flask Storage API Monitoring
 
@@ -132,7 +132,7 @@ docker-compose up -d
 * Flask app exposes `/metrics`
 * Use Prometheus Python client for instrumentation
 
----
+
 
 ## 4. Traefik & PostgreSQL Monitoring
 
@@ -258,6 +258,3 @@ docker-compose down -v
 * Secure endpoints in production
 
 
-
-
-MIT License
