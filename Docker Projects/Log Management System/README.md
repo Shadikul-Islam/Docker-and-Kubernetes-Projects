@@ -2,7 +2,7 @@
 
 This repository contains multiple Dockerized configurations of the ELK Stack (Elasticsearch, Logstash, Kibana) for different use cases. Each setup is isolated in its own folder to make it easier to experiment, learn, and deploy based on requirements.
 
----
+
 
 ## Project Structure
 
@@ -17,7 +17,7 @@ This repository contains multiple Dockerized configurations of the ELK Stack (El
 
 Each folder contains its own `docker-compose.yml`, configuration files, and environment-specific setup.
 
----
+
 
 ## Overview of Setups
 
@@ -44,7 +44,7 @@ A minimal ELK stack setup without any security features.
 docker-compose up -d
 ```
 
----
+
 
 ### 2. ELK With X-Pack Security
 
@@ -62,7 +62,7 @@ This setup enables X-Pack security features, including authentication and role-b
 **Run:** Follow the setup.txt file
 
 
----
+
 
 ### 3. ELK With TLS
 
@@ -85,7 +85,7 @@ Secure communication between ELK components using TLS/SSL.
 * Certificates must be correctly mounted
 * Ensure proper DNS or host configuration
 
----
+
 
 ### 4. ELK With Syslog + ML Alerting
 
@@ -113,16 +113,16 @@ docker-compose up -d
 * Requires proper ML license (trial or higher)
 * Preconfigured ML jobs may be included
 
----
 
-## ⚙️ Prerequisites
+
+## Prerequisites
 
 * Docker
 * Docker Compose
 * Minimum 4GB RAM (8GB recommended)
 * Open ports: 9200, 5601, 5044 (depending on setup)
 
----
+
 
 ## Configuration
 
@@ -134,7 +134,7 @@ Each setup includes:
 * Logstash pipeline configs
 * Kibana configs
 
----
+
 
 ## Testing
 
@@ -147,7 +147,7 @@ For secured setups:
 
 * Use configured username/password
 
----
+
 
 ## Logging & Monitoring
 
@@ -159,7 +159,6 @@ docker logs <container_name>
 
 * Kibana provides visualization dashboards
 
----
 
 ## Common Issues
 
@@ -180,7 +179,6 @@ sysctl -w vm.max_map_count=262144
 
 * Verify certificate paths and validity
 
----
 
 ## Cleanup
 
@@ -188,7 +186,6 @@ sysctl -w vm.max_map_count=262144
 docker-compose down -v
 ```
 
----
 
 ## Notes
 
